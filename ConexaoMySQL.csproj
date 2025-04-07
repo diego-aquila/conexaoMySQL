@@ -106,9 +106,11 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\Usuario.cs" />
+    <Compile Include="Model\UsuarioRepositorio.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AuthService.cs" />
+    <Compile Include="Services\Criptografia.cs" />
     <Compile Include="Services\DatabaseService.cs" />
     <Compile Include="Services\SessionUser.cs" />
     <Compile Include="TelaPrincipal.cs">

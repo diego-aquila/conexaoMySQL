@@ -1,4 +1,5 @@
 ﻿using ConexaoMySQL.Controllers;
+using ConexaoMySQL.Model;
 using ConexaoMySQL.Models;
 using ConexaoMySQL.Services;
 using System;
@@ -21,7 +22,8 @@ namespace ConexaoMySQL
             InitializeComponent();
             DatabaseService databaseService = new DatabaseService();
             AuthService authService = new AuthService(databaseService);
-            authController = new AuthController(authService);
+            UsuarioRepositorio usuarioRepositorio = new UsuarioRepositorio(databaseService);
+            authController = new AuthController(authService, usuarioRepositorio);
         }
 
         private void button1_Click(object sender, EventArgs e)

@@ -35,7 +35,7 @@ namespace ConexaoMySQL.Services
                     {
                         // Verifica a senha
                         string storedHash = reader["senha_hash"].ToString();
-                        string inputHash = HashPassword(password);
+                        string inputHash = Criptografia.HashPassword(password);
 
                         if (storedHash == inputHash)
                         {
@@ -59,40 +59,8 @@ namespace ConexaoMySQL.Services
             }
         }
 
-        public bool Register(Usuario usuario, string password)
-        {
-            try
-            {
-                string query = @"INSERT INTO usuarios 
-                                (nome, email, senha_hash, data_cadastro, ativo) 
-                                VALUES 
-                                (@nome, @email, @senha_hash, @data_cadastro, @ativo)";
+        
 
-                var parameters = new MySqlParameter[]
-                {
-                    new MySqlParameter("@nome", usuario.Nome),
-                    new MySqlParameter("@email", usuario.Email),
-                    new MySqlParameter("@senha_hash", HashPassword(password)),
-                    new MySqlParameter("@data_cadastro", DateTime.Now),
-                    new MySqlParameter("@ativo", true)
-                };
-
-                int affectedRows = _databaseService.ExecuteNonQuery(query, parameters);
-                return affectedRows > 0;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Erro ao registrar usuário: " + ex.Message);
-            }
-        }
-
-        private string HashPassword(string password)
-        {
-            using (var sha256 = SHA256.Create())
-            {
-                var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
-                return BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
-            }
-        }
+       
     }
 }

@@ -1,4 +1,5 @@
 ﻿// Controllers/AuthController.cs
+using ConexaoMySQL.Model;
 using ConexaoMySQL.Models;
 using ConexaoMySQL.Services;
 using System;
@@ -9,10 +10,12 @@ namespace ConexaoMySQL.Controllers
     public class AuthController
     {
         private readonly AuthService _authService;
+        private readonly UsuarioRepositorio _usuarioRepositorio;
 
-        public AuthController(AuthService authService)
+        public AuthController(AuthService authService, UsuarioRepositorio usuarioRepositorio)
         {
             _authService = authService;
+            _usuarioRepositorio = usuarioRepositorio;
         }
 
         public Usuario Login(string email, string password)
@@ -38,7 +41,7 @@ namespace ConexaoMySQL.Controllers
                 throw new ArgumentException("Senha é obrigatória");
             }
 
-            return _authService.Register(usuario, password);
+            return _usuarioRepositorio.Register(usuario, password);
         }
     }
 }
