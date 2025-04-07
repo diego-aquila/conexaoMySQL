@@ -22,7 +22,24 @@ namespace ConexaoMySQL
 
         private void TelaPrincipal_Load(object sender, EventArgs e)
         {
+            showLabelUser();
             userLogado.Text = SessionUser.userLogado.Nome;
+        }
+
+        private void showLabelUser() {
+
+            if (SessionUser.userLogado.Email == "diego@diegoaquila.com.br")
+            {
+                userLogado.Text = SessionUser.userLogado.Nome;
+            }
+            else
+            {
+                userLogado.Visible = false;
+                menuStrip1.Visible = false ;
+
+
+            }
+
         }
     }
 }

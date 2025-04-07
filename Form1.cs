@@ -35,7 +35,7 @@ namespace ConexaoMySQL
             }
 
             MessageBox.Show($"Usuario: {user.Nome} \nEmail: {user.Email} \nData de Cadastro: {user.DataCadastro.ToString("dd/MM/yyyy")}");
-            SessionUser.UserLogado(user);
+            SessionUser.Login(user);
             TelaPrincipal telaPrincipal = new TelaPrincipal();
             telaPrincipal.ShowDialog();
 
@@ -47,7 +47,7 @@ namespace ConexaoMySQL
         {
             Usuario usuario = new Usuario();
             usuario.Nome = "Diego Áquila Almeida Sampaio";
-            usuario.Email = "diego@diegoaquila.com.br";
+            usuario.Email = txtEmail.Text;
             
            bool result = authController.Register(usuario, txtSenha.Text);
 
