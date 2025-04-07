@@ -35,7 +35,7 @@ namespace ConexaoMySQL
             else
             {
                 userLogado.Visible = false;
-                menuStrip1.Visible = false ;
+                menuStrip1.Visible = false;
 
 
             }
