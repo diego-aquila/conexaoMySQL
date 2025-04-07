@@ -1,7 +1,7 @@
 ﻿// Services/DatabaseService.cs
 using System;
-using MySql.Data.MySqlClient;
 using System.Configuration;
+using MySql.Data.MySqlClient;
 
 namespace ConexaoMySQL.Services
 {

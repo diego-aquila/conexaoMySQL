@@ -5,6 +5,7 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Security.Cryptography;
 using System.Text;
+using System.Windows.Forms;
 
 namespace ConexaoMySQL.Services
 {

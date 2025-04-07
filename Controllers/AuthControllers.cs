@@ -2,6 +2,7 @@
 using ConexaoMySQL.Models;
 using ConexaoMySQL.Services;
 using System;
+using System.Windows.Forms;
 
 namespace ConexaoMySQL.Controllers
 {
@@ -26,6 +27,7 @@ namespace ConexaoMySQL.Controllers
 
         public bool Register(Usuario usuario, string password)
         {
+           
             if (usuario == null)
             {
                 throw new ArgumentNullException(nameof(usuario));
