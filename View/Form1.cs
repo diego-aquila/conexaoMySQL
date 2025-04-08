@@ -48,7 +48,7 @@ namespace ConexaoMySQL
         private void button2_Click(object sender, EventArgs e)
         {
             Usuario usuario = new Usuario();
-            usuario.Nome = "Diego Áquila Almeida Sampaio";
+            usuario.Nome = txtNome.Text;
             usuario.Email = txtEmail.Text;
             
            bool result = authController.Register(usuario, txtSenha.Text);
