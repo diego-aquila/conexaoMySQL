@@ -23,30 +23,33 @@ namespace ConexaoMySQL.Services
             try
             {
                 // Primeiro busca o usuário pelo email
-                string query = "SELECT id, nome, email, senha_hash, data_cadastro, ativo FROM usuarios WHERE email = @email";
-                var parameters = new MySqlParameter[]
+                string query = "SELECT id, nome, email, senha_hash, data_cadastro, ativo FROM usuarios WHERE email = @emailDigitado";
+                var parameters = new MySqlParameter[] 
                 {
-                    new MySqlParameter("@email", email)
+
+                    new MySqlParameter("@emailDigitado", email),
+
                 };
 
-                using (var reader = _databaseService.ExecuteQuery(query, parameters))
+                using (var respostaBanco = _databaseService.ExecuteQuery(query, parameters))
                 {
-                    if (reader.Read())
+                    if (respostaBanco.Read())
+                        
                     {
                         // Verifica a senha
-                        string storedHash = reader["senha_hash"].ToString();
+                        string storedHash = respostaBanco["senha_hash"].ToString();
                         string inputHash = Criptografia.HashPassword(password);
 
                         if (storedHash == inputHash)
                         {
                             return new Usuario
                             {
-                                Id = Convert.ToInt32(reader["id"]),
-                                Nome = reader["nome"].ToString(),
-                                Email = reader["email"].ToString(),
-                                SenhaHash = storedHash,
-                                DataCadastro = Convert.ToDateTime(reader["data_cadastro"]),
-                                Ativo = Convert.ToBoolean(reader["ativo"])
+                                Id = Convert.ToInt32(respostaBanco["id"]),
+                                Nome = respostaBanco["nome"].ToString(),
+                                Email = respostaBanco["email"].ToString(),
+                                SenhaHash = respostaBanco["senha_hash"].ToString(),
+                                DataCadastro = Convert.ToDateTime(respostaBanco["data_cadastro"]),
+                                Ativo = Convert.ToBoolean(respostaBanco["ativo"])
                             };
                         }
                     }
