@@ -34,6 +34,8 @@ namespace ConexaoMySQL.Services
         }
         
         public MySqlDataReader ExecuteQuery(string query, MySqlParameter[] parameters = null)
+
+            
         {
             try
             {

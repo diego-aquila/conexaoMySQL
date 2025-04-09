@@ -57,6 +57,10 @@ namespace ConexaoMySQL
             {
                 MessageBox.Show("Usuario inserido");
             }
+            else {
+
+                MessageBox.Show("Usuario não inserido");
+            }
         }
     }
 }
