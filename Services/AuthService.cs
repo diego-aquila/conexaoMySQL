@@ -23,7 +23,7 @@ namespace ConexaoMySQL.Services
             try
             {
                 // Primeiro busca o usuário pelo email
-                string query = "SELECT id, nome, email, senha_hash, data_cadastro, ativo FROM usuarios WHERE email = @emailDigitado";
+                string query = "SELECT * FROM usuarios JOIN regras ON usuarios.idRegra = regras.idregra WHERE email = @emailDigitado";
                 var parameters = new MySqlParameter[] 
                 {
 
@@ -42,15 +42,10 @@ namespace ConexaoMySQL.Services
 
                         if (storedHash == inputHash)
                         {
-                            return new Usuario
-                            {
-                                Id = Convert.ToInt32(respostaBanco["id"]),
-                                Nome = respostaBanco["nome"].ToString(),
-                                Email = respostaBanco["email"].ToString(),
-                                SenhaHash = respostaBanco["senha_hash"].ToString(),
-                                DataCadastro = Convert.ToDateTime(respostaBanco["data_cadastro"]),
-                                Ativo = Convert.ToBoolean(respostaBanco["ativo"])
-                            };
+                            Usuario usuario = new Usuario();
+                            usuario = Usuario.UserFromDataReader(respostaBanco);
+
+                            return usuario;
                         }
                     }
                 }

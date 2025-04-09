@@ -24,18 +24,14 @@ namespace ConexaoMySQL.Model
 
             try {
 
-                string query = "SELECT * FROM usuarios";
+                string query = "SELECT * FROM usuarios JOIN regras on usuarios.idRegra = regras.idregra";
                 MySqlDataReader resultadoBanco = _databaseService.ExecuteQuery(query);
 
                 while (resultadoBanco.Read())
                 {
                     Usuario usuario = new Usuario();
-                    usuario.Id = Convert.ToInt32(resultadoBanco["id"].ToString());
-                    usuario.Nome = resultadoBanco["nome"].ToString();
-                    usuario.Email = resultadoBanco["email"].ToString();
-                    usuario.SenhaHash = resultadoBanco["senha_hash"].ToString();
-                    usuario.DataCadastro = Convert.ToDateTime(resultadoBanco["data_cadastro"].ToString());
-                    usuario.Ativo = Convert.ToBoolean(resultadoBanco["ativo"].ToString());
+                    usuario = Usuario.UserFromDataReader(resultadoBanco);
+                   
                     
                     usuarios.Add(usuario);
                 }

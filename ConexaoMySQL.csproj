@@ -100,6 +100,7 @@
   <ItemGroup>
     <Compile Include="Controllers\AuthControllers.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Model\Regra\Regra.cs" />
     <Compile Include="View\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
