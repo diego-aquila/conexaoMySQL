@@ -18,6 +18,41 @@ namespace ConexaoMySQL.Model
             _databaseService = databaseService;
         }
 
+        public List<Usuario> getAllUser() { 
+        
+        List<Usuario> usuarios = new List<Usuario>();
+
+            try {
+
+                string query = "SELECT * FROM usuarios";
+                MySqlDataReader resultadoBanco = _databaseService.ExecuteQuery(query);
+
+                while (resultadoBanco.Read())
+                {
+                    Usuario usuario = new Usuario();
+                    usuario.Id = Convert.ToInt32(resultadoBanco["id"].ToString());
+                    usuario.Nome = resultadoBanco["nome"].ToString();
+                    usuario.Email = resultadoBanco["email"].ToString();
+                    usuario.SenhaHash = resultadoBanco["senha_hash"].ToString();
+                    usuario.DataCadastro = Convert.ToDateTime(resultadoBanco["data_cadastro"].ToString());
+                    usuario.Ativo = Convert.ToBoolean(resultadoBanco["ativo"].ToString());
+                    
+                    usuarios.Add(usuario);
+                }
+                _databaseService.CloseConnection();
+
+                return usuarios;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro ao buscar usuários: " + ex.Message);
+            }
+         
+
+        }
+        
+
         public bool Register(Usuario usuario, string password)
         {
             try
